@@ -8,6 +8,10 @@ public class Cliente {
         this.nome = nome;
     }
 
+    public void criarIdadeCliente(int idade){
+        this.idade = idade;
+    }
+
     //getters
     public String pegarNomeCliente(){
         return this.nome;

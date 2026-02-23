@@ -1,21 +1,8 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
-
-    static double totalGeral = 0;
-
-    static double criarPedido(String produto, double preco, int quantidade) {
-
-        double total = preco * quantidade;
-
-        // desconto para compras acima de 1000
-        if (total > 1000) {
-            System.out.println("Desconto de 10% aplicado!");
-            total = total * 0.9;
-        }
-
-        return total;
-    }
 
     public static void main(String[] args) {
 
@@ -23,45 +10,46 @@ public class Main {
 
         System.out.println("Digite o nome do cliente:");
         String nome = scanner.nextLine();
+        System.out.println("Digite a idade do cliente:");
+        String idade = scanner.nextLine();
+
+        List<Produto> produtosFornecidos = new ArrayList<Produto>();
 
         Cliente cliente = new Cliente();
 
         cliente.criarNomeCliente(nome);
+        cliente.criarIdadeCliente(Integer.parseInt(idade));
 
-        System.out.println("Quantos pedidos deseja fazer?");
-        int quantidadePedidos = scanner.nextInt();
+        System.out.println("Quantos produtos você quer cadastrar?:");
+        int quantosProdutos = scanner.nextInt();
         scanner.nextLine();
 
-        for (int i = 1; i <= quantidadePedidos; i++) {
+        for(int i = 0; i < quantosProdutos; i++){
 
-            System.out.println("\nPedido " + i);
+            System.out.println("Digite o nome do produto:");
+            String nomeProduto = scanner.nextLine();
 
-            System.out.println("Nome do produto:");
-            String produto = scanner.nextLine();
+            System.out.println("Digite o preço do produto:");
+            double precoProduto = scanner.nextDouble();
 
-            System.out.println("Preço:");
-            double preco = scanner.nextDouble();
-
-            System.out.println("Quantidade:");
-            int quantidade = scanner.nextInt();
             scanner.nextLine();
+            Produto produto = new Produto();
+            produto.criarProduto(nomeProduto, precoProduto);
 
-            double totalPedido = criarPedido(produto, preco, quantidade);
-
-            totalGeral += totalPedido;
-
-            System.out.println("Total do pedido: R$ " + totalPedido);
+            double preco = produto.getPreco();
+            System.out.println("Produto cadastrado:" + preco);
         }
+
 
         System.out.println("\n===== RESUMO =====");
         System.out.println("Cliente: " + cliente.pegarNomeCliente());
         System.out.println("Idade do cliente: " + cliente.getIdadeCliente());
-        System.out.println("Total geral: R$ " + totalGeral);
+//        System.out.println("Total geral: R$ " + totalGeral);
 
         // bônus para quem gastou muito
-        if (totalGeral > 5000) {
-            System.out.println("Cliente VIP!");
-        }
+//        if (totalGeral > 5000) {
+//            System.out.println("Cliente VIP!");
+//        }
 
         scanner.close();
     }

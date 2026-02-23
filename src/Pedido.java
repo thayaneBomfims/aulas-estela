@@ -2,28 +2,56 @@ import java.util.List;
 
 public class Pedido {
     // produto é do tipo Produto (nome, preco)
-    private List<Produto> produto;
+    // as boquinhas <> servem para tipar - dizer qual o tipo dos dados que vão estar nesta lista
+    private List<Produto> produtos;
 
-    // EXEMPLO DE LISTA DE PRODUTOS
+    // EXEMPLO DE LISTA DE PRODUTOS (classe que gera objetos)
 //    [
 //        {
-//            "nome": "Escova de dente",
-//                "preco": 10
+//            nome: "Escova de dente",
+//            preco: 10,
+//            peso: 70g
 //        },
 //        {
-//            "nome": "Creme dental",
-//                "preco": 30
+//            nome: "Creme dental",
+//            preco: 30
 //        }
+//    ]
+
+    // Lista de String
+//    [
+//         "abacate",
+//         "laranja"
 //    ]
 
     private int quantidade;
     private double precoFinal;
 
-    public void fazerPedido(List<Produto> produtos) {
+    private double calcularPrecoFinal (List<Produto> produtosParaCalcular) {
+        double total = 0;
+
+        for(Produto produtoItem : produtosParaCalcular){
+
+            total = total + produtoItem.getPreco();
+
+        }
+
+        return total;
+    }
+
+    public void fazerPedido(List<Produto> produtosParaPedido) {
+
+        this.produtos = produtosParaPedido;
 
         this.quantidade = produtos.size();
 
+        this.precoFinal = calcularPrecoFinal(produtosParaPedido);
 
+        if (this.precoFinal > 100) {
+            System.out.println("Desconto de 10% aplicado!");
+            this.precoFinal = this.precoFinal * 0.9;
+        }
 
     }
+
 }
