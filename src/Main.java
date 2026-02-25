@@ -13,8 +13,6 @@ public class Main {
         System.out.println("Digite a idade do cliente:");
         String idade = scanner.nextLine();
 
-        List<Produto> produtosFornecidos = new ArrayList<Produto>();
-
         Cliente cliente = new Cliente();
 
         cliente.criarNomeCliente(nome);
@@ -23,6 +21,8 @@ public class Main {
         System.out.println("Quantos produtos você quer cadastrar?:");
         int quantosProdutos = scanner.nextInt();
         scanner.nextLine();
+
+        List<Produto> produtosFornecidos = new ArrayList<Produto>();
 
         for(int i = 0; i < quantosProdutos; i++){
 
@@ -36,15 +36,25 @@ public class Main {
             Produto produto = new Produto();
             produto.criarProduto(nomeProduto, precoProduto);
 
-            double preco = produto.getPreco();
-            System.out.println("Produto cadastrado:" + preco);
+            produtosFornecidos.add(produto);
         }
 
 
         System.out.println("\n===== RESUMO =====");
         System.out.println("Cliente: " + cliente.pegarNomeCliente());
         System.out.println("Idade do cliente: " + cliente.getIdadeCliente());
-//        System.out.println("Total geral: R$ " + totalGeral);
+        System.out.println("PRODUTOS CADASTRADOS");
+        System.out.println(produtosFornecidos);
+
+        for(Produto produtoItem : produtosFornecidos){
+            System.out.println("Nome do Produto:" + produtoItem.getNome() + " Preço:" + produtoItem.getPreco());
+        }
+
+        Pedido pedido = new Pedido();
+
+        pedido.fazerPedido(produtosFornecidos);
+
+        System.out.println("Total geral: R$ " + pedido.getPrecoFinal());
 
         // bônus para quem gastou muito
 //        if (totalGeral > 5000) {

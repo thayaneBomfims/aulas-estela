@@ -15,7 +15,7 @@ public class Pedido {
 //        {
 //            nome: "Creme dental",
 //            preco: 30
-//        }
+//        },
 //    ]
 
     // Lista de String
@@ -26,6 +26,10 @@ public class Pedido {
 
     private int quantidade;
     private double precoFinal;
+
+    public double getPrecoFinal() {
+        return this.precoFinal;
+    }
 
     private double calcularPrecoFinal (List<Produto> produtosParaCalcular) {
         double total = 0;

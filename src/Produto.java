@@ -9,6 +9,10 @@ public class Produto {
         return this.preco;
     }
 
+    public String getNome(){
+        return this.nome;
+    }
+
     //setter - setar/adicionar/modificar algo
     public void criarProduto(String nome, double preco){
         // é nesse momento que os dados de fora recebidos nos parâmetros estão sendo
