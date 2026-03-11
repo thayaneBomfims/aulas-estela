@@ -9,19 +9,12 @@ public class Pedido {
 //    [
 //        {
 //            nome: "Escova de dente",
-//            preco: 10,
-//            peso: 70g
+//            preco: 10
 //        },
 //        {
 //            nome: "Creme dental",
 //            preco: 30
 //        },
-//    ]
-
-    // Lista de String
-//    [
-//         "abacate",
-//         "laranja"
 //    ]
 
     private int quantidade;

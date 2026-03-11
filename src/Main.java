@@ -13,10 +13,20 @@ public class Main {
         System.out.println("Digite a idade do cliente:");
         String idade = scanner.nextLine();
 
-        Cliente cliente = new Cliente();
+        System.out.println("Cliente VIP? (s/n)");
+        String opcao = scanner.nextLine();
+
+        Cliente cliente;
+
+        if(opcao.equals("s")) {
+            cliente = new ClienteVip();
+        }else{
+            cliente = new Cliente();
+        }
 
         cliente.criarNomeCliente(nome);
         cliente.criarIdadeCliente(Integer.parseInt(idade));
+
 
         System.out.println("Quantos produtos você quer cadastrar?:");
         int quantosProdutos = scanner.nextInt();
@@ -39,6 +49,7 @@ public class Main {
             produtosFornecidos.add(produto);
         }
 
+        int i = 1;
 
         System.out.println("\n===== RESUMO =====");
         System.out.println("Cliente: " + cliente.pegarNomeCliente());
@@ -54,12 +65,12 @@ public class Main {
 
         pedido.fazerPedido(produtosFornecidos);
 
-        System.out.println("Total geral: R$ " + pedido.getPrecoFinal());
-
-        // bônus para quem gastou muito
-//        if (totalGeral > 5000) {
-//            System.out.println("Cliente VIP!");
-//        }
+       if(opcao.equals("s")){
+           double totalComDesconto = cliente.aplicarDesconto(pedido.getPrecoFinal());
+           System.out.println("Total com desconto VIP: R$ " + totalComDesconto);
+       }else{
+           System.out.println("Total geral: R$ " + pedido.getPrecoFinal());
+       }
 
         scanner.close();
     }
