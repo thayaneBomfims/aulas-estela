@@ -20,4 +20,8 @@ public class Cliente {
     public int getIdadeCliente(){
         return this.idade;
     }
+
+    public double aplicarDesconto(double valorDaCompra) {
+        return valorDaCompra;
+    }
 }

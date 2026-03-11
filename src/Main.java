@@ -13,16 +13,26 @@ public class Main {
         System.out.println("Digite a idade do cliente:");
         String idade = scanner.nextLine();
 
-        List<Produto> produtosFornecidos = new ArrayList<Produto>();
+        System.out.println("Cliente VIP? (s/n)");
+        String opcao = scanner.nextLine();
 
-        Cliente cliente = new Cliente();
+        Cliente cliente;
+
+        if(opcao.equals("s")) {
+            cliente = new ClienteVip();
+        }else{
+            cliente = new Cliente();
+        }
 
         cliente.criarNomeCliente(nome);
         cliente.criarIdadeCliente(Integer.parseInt(idade));
 
+
         System.out.println("Quantos produtos você quer cadastrar?:");
         int quantosProdutos = scanner.nextInt();
         scanner.nextLine();
+
+        List<Produto> produtosFornecidos = new ArrayList<Produto>();
 
         for(int i = 0; i < quantosProdutos; i++){
 
@@ -36,20 +46,31 @@ public class Main {
             Produto produto = new Produto();
             produto.criarProduto(nomeProduto, precoProduto);
 
-            double preco = produto.getPreco();
-            System.out.println("Produto cadastrado:" + preco);
+            produtosFornecidos.add(produto);
         }
 
+        int i = 1;
 
         System.out.println("\n===== RESUMO =====");
         System.out.println("Cliente: " + cliente.pegarNomeCliente());
         System.out.println("Idade do cliente: " + cliente.getIdadeCliente());
-//        System.out.println("Total geral: R$ " + totalGeral);
+        System.out.println("PRODUTOS CADASTRADOS");
+        System.out.println(produtosFornecidos);
 
-        // bônus para quem gastou muito
-//        if (totalGeral > 5000) {
-//            System.out.println("Cliente VIP!");
-//        }
+        for(Produto produtoItem : produtosFornecidos){
+            System.out.println("Nome do Produto:" + produtoItem.getNome() + " Preço:" + produtoItem.getPreco());
+        }
+
+        Pedido pedido = new Pedido();
+
+        pedido.fazerPedido(produtosFornecidos);
+
+       if(opcao.equals("s")){
+           double totalComDesconto = cliente.aplicarDesconto(pedido.getPrecoFinal());
+           System.out.println("Total com desconto VIP: R$ " + totalComDesconto);
+       }else{
+           System.out.println("Total geral: R$ " + pedido.getPrecoFinal());
+       }
 
         scanner.close();
     }
